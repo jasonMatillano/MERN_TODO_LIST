@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import axios from 'axios'
 
-function Create() {
+function Create(props) {
+
+    const url = props.url
 
     const [todo, setTodo] = useState('')
 
     const handleAdd = () => {
-        axios.post('http://3.95.188.153:3001/add', { todo : todo })
+        axios.post(url+'add', { todo : todo })
         .then((res) => {
             console.log(res.data)
             location.reload()

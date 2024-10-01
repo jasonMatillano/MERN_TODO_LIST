@@ -3,14 +3,14 @@ import Create from './Create.jsx'
 import axios from 'axios'
 import { BsCircleFill, BsFillCheckCircleFill, BsFillTrash2Fill } from 'react-icons/bs'
 
-function Home() {
+function Home(props) {
+
+  const url = props.url;
 
   const [todoList, setTodoList] = useState([])
 
-
-
   useEffect(() => {
-    axios.get('http://3.95.188.153:3001/get')
+    axios.get(url+'get')
     .then((res) => {
       setTodoList(res.data)
     })
@@ -20,7 +20,7 @@ function Home() {
   }, [])
 
   const handleEdit = (id) => {
-    axios.put('http://3.95.188.153:3001/update/'+id)
+    axios.put(url+'update/'+id)
     .then((res) => {
       console.log(res.data)
       location.reload()
@@ -31,7 +31,7 @@ function Home() {
   }
 
   const handleDelete = (id) => {
-    axios.delete('http://3.95.188.153:3001/delete/'+id)
+    axios.delete(url + 'delete/'+id)
     .then((res) => {
       console.log(res.data)
       location.reload()
@@ -44,7 +44,7 @@ function Home() {
   return (
     <div className="todo-container">
       <h2>Todo List</h2>
-      <Create />
+      <Create url={url}/>
       {
         todoList.length === 0
           ? <h3>No todo items</h3>

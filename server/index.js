@@ -26,16 +26,31 @@ app.get('/get', (req, res) => {
 })
 
 app.put('/update/:id', (req, res) => {
-    const { id } = req.params
-    const { todo, done } = req.body
-    TodoModel.findByIdAndUpdate(id, { done : true })
-    .then((result) => {
-        res.json(result)
+    const { id } = req.params;
+
+    // Find the document by ID first
+    TodoModel.findById(id)
+    .then((todoItem) => {
+        if (!todoItem) {
+            return res.status(404).json({ error: "Todo item not found" });
+        }
+
+        // Toggle the `done` value
+        TodoModel.findByIdAndUpdate(id, { done: !todoItem.done }, { new: true }) // `new: true` to return the updated document
+        .then((updatedTodo) => {
+            res.json(updatedTodo);
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json({ error: "An error occurred while updating the todo item" });
+        });
     })
     .catch((err) => {
-        console.log(err)
-    })
-})
+        console.log(err);
+        res.status(500).json({ error: "An error occurred while fetching the todo item" });
+    });
+});
+
 
 app.delete('/delete/:id', (req, res) => {
     const { id } = req.params

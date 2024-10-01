@@ -6,7 +6,7 @@ function Create() {
     const [todo, setTodo] = useState('')
 
     const handleAdd = () => {
-        axios.post('http://localhost:3001/add', { todo : todo })
+        axios.post('http://3.95.188.153:3001/add', { todo : todo })
         .then((res) => {
             console.log(res.data)
             location.reload()

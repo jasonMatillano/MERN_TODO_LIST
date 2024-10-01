@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
+import PropTypes from 'prop-types';
 
 function Create(props) {
 
@@ -25,5 +26,9 @@ function Create(props) {
         </div>
     )
 }
+
+Create.propTypes = {
+    url: PropTypes.string.isRequired,
+};
 
 export default Create

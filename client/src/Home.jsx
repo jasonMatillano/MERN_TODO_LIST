@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Create from './Create.jsx'
 import axios from 'axios'
+import PropTypes from 'prop-types';
 import { BsCircleFill, BsFillCheckCircleFill, BsFillTrash2Fill } from 'react-icons/bs'
 
 function Home(props) {
@@ -68,5 +69,9 @@ function Home(props) {
     </div>
   )
 }
+
+Home.propTypes = {
+  url: PropTypes.string.isRequired,
+};
 
 export default Home

@@ -9,6 +9,7 @@ function Create() {
         axios.post('http://localhost:3001/add', { todo : todo })
         .then((res) => {
             console.log(res.data)
+            location.reload()
         })
         .catch((err) => {
             console.log(err)

@@ -25,11 +25,34 @@ app.get('/get', (req, res) => {
     })
 })
 
+app.put('/update/:id', (req, res) => {
+    const { id } = req.params
+    const { todo, done } = req.body
+    TodoModel.findByIdAndUpdate(id, { done : true })
+    .then((result) => {
+        res.json(result)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+})
+
+app.delete('/delete/:id', (req, res) => {
+    const { id } = req.params
+    TodoModel.findByIdAndDelete(id)
+    .then((result) => {
+        res.json(result)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+})
+
 app.post('/add', (req, res) => {
-    const todo = req.body.todo
+    const { todo } = req.body
     TodoModel.create({ todo })
-    .then(() => {
-        console.log('Todo added')
+    .then((result) => {
+        res.json(result)
     })
     .catch((err) => {
         console.log(err)

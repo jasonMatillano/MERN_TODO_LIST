@@ -15,6 +15,7 @@ services:
       - mongo
     environment:
       - MONGO_URI=mongodb://mongo-container:27017/todolist
+      
   client:
     build: ./client
     container_name: client_c

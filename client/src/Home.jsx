@@ -54,12 +54,13 @@ function Home(props) {
               <div className="todo-item" key={index}>
                 <div className='checkbox' onClick={() => handleEdit (todo._id)}>
                    {
-                     todo.done
-                     ? <BsFillCheckCircleFill className="icon" /> : <BsCircleFill className="icon" />
+                     todo.done 
+                     ? <BsFillCheckCircleFill className="icon" /> 
+                     : <BsCircleFill className="icon" />
                    }
                   <p>{todo.todo}</p>
                 </div>
-                <div>
+                <div className='delete'>
                   <span onClick={() => handleDelete(todo._id)}><BsFillTrash2Fill className="icon"/></span>
                 </div>
               </div>

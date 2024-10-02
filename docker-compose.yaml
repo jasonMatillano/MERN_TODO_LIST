@@ -1,0 +1,24 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    container_name: mongo-container
+    ports:
+      - "27017:27017"
+
+  app:
+    build: ./server
+    container_name: server_c
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://mongo-container:27017/todolist
+  client:
+    build: ./client
+    container_name: client_c
+    ports:
+      - "5173:5173"
+    stdin_open: true
+    tty: true

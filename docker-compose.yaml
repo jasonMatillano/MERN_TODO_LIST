@@ -2,11 +2,11 @@ version: '3'
 services:
   mongo:
     image: mongo
-    container_name: mongo-container
+    container_name: mongo-c
     ports:
       - "27017:27017"
 
-  app:
+  server:
     build: ./server
     container_name: server_c
     ports:

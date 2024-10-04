@@ -5,21 +5,39 @@ services:
     container_name: mongo-container
     ports:
       - "27017:27017"
+    networks:
+      - app-network
 
   server:
     build: ./server
     container_name: server_c
+    volumes:
+      - ./server:/app
+      - /app/node_modules
     ports:
       - "3001:3001"
     depends_on:
       - mongo
     environment:
       - MONGO_URI=mongodb://mongo-container:27017/todolist
+    networks:
+      - app-network
       
   client:
     build: ./client
     container_name: client_c
+    volumes:
+      - ./client:/app
+      - /app/node_modules
     ports:
       - "5173:5173"
+    depends_on:
+      - server
     stdin_open: true
     tty: true
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
